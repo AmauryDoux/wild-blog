@@ -39,7 +39,7 @@ export default['$stateProvider',
             ]
         }).state('algo1', {
             url: '/algo1',
-            template: '',
+            template: '<p>{{resultAlgo1}}<p/><p>{{resultAlgo2}}<p/><p>{{resultAlgo3}}<p/><p>{{resultAlgo4}}<p/><p>{{resultAlgo5}}<p/>',
             controller: [
                 '$scope',
                 function($scope) {
@@ -54,7 +54,12 @@ export default['$stateProvider',
                             }})
                         return result
                     }
-                    console.log('algo page here')
+                    $scope.resultAlgo1 = (friend(["Ryan", "Kieran", "Mark"]))
+                    $scope.resultAlgo2 = (friend(["Ryan", "Kieran", "Mark"]))
+                    $scope.resultAlgo3 = (friend(["Ryan", "Jimmy", "123", "4", "Cool Man"]))
+                    $scope.resultAlgo4 = (friend(["Jimm", "Cari", "aret", "truehdnviegkwgvke", "sixtyiscooooool"]))
+                    $scope.resultAlgo5 = (friend(["Love", "Your", "Face", "1"]))
+
                 }
             ]
         })
