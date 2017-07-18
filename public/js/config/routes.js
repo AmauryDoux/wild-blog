@@ -1,41 +1,62 @@
 /*
 Create Angular config in app.config module
 */
-export default ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) => {
-    'use strict'
-    // Define prefix
-    $locationProvider.hashPrefix('!');
-    // For each url not found redirection to '/'
-    $urlRouterProvider.otherwise('/posts/');
-    /*
+export default['$stateProvider',
+    '$urlRouterProvider',
+    '$locationProvider',
+    ($stateProvider, $urlRouterProvider, $locationProvider) => {
+        'use strict'
+        // Define prefix
+        $locationProvider.hashPrefix('!');
+        // For each url not found redirection to '/'
+        $urlRouterProvider.otherwise('/posts/');
+        /*
       Define a state with name 'app' this state is abstract and url is empty (root of application)
       template is ui-view it's used to display nested views
     */
-    $stateProvider.state('app', {
+        $stateProvider.state('app', {
             url: '',
             abstract: true,
             template: '<navbar /><div class="container"><ui-view></ui-view></div>'
-        })
-        .state('callback', {
+        }).state('callback', {
             url: '/auth/callback/:token',
             template: '',
-            controller: ['UsersService', '$stateParams', '$state', function(UsersService, $stateParams, $state) {
-                if ($stateParams.token) {
-                    UsersService.setToken($stateParams.token).then((user) => {
-                        let toastContent = `Welcome ${user.name} !`
-                        Materialize.toast(toastContent, 4000, 'toast-success')
+            controller: [
+                'UsersService',
+                '$stateParams',
+                '$state',
+                function(UsersService, $stateParams, $state) {
+                    if ($stateParams.token) {
+                        UsersService.setToken($stateParams.token).then((user) => {
+                            let toastContent = `Welcome ${user.name} !`
+                            Materialize.toast(toastContent, 4000, 'toast-success')
+                            $state.go('blog.list')
+                        })
+                    } else {
                         $state.go('blog.list')
-                    })
-                } else {
-                    $state.go('blog.list')
+                    }
                 }
-            }]
-        })
-        .state('algo1', {
+            ]
+        }).state('algo1', {
             url: '/algo1',
             template: '',
-            controller: [function (){
-                document.write('hey algo1')
-            }]
+            controller: [
+                '$scope',
+                function($scope) {
+                    function friend(friends) {
+                        var result = []
+
+                        friends.forEach((friend) => {
+
+                            if (friend.length === 4) {
+
+                                result.push(friend)
+                            }})
+                        return result
+                    }
+                    console.log('algo page here')
+                }
+            ]
         })
-}]
+    }
+]
