@@ -8,6 +8,7 @@ let favicon         = require('serve-favicon')
 let methodOverride  = require('method-override')
 let logger          = require('morgan')
 let passport        = require('passport')
+let moment          = require('moment')
 
 // Will automatically load index.js in routes folder
 let routes          = require('./app/routes')
@@ -68,7 +69,7 @@ app.use((request, response, next) => {
   next(err)
 })
 
-// To better understand middlewares: 
+// To better understand middlewares:
 // http://expressjs.com/en/guide/writing-middleware.html
 // Middleware to catch all errors
 app.use((error, request, response, next) => {

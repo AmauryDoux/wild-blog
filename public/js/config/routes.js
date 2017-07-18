@@ -31,4 +31,11 @@ export default ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($s
                 }
             }]
         })
+        .state('algo1', {
+            url: '/algo1',
+            template: '',
+            controller: [function (){
+                document.write('hey algo1')
+            }]
+        })
 }]
